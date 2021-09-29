@@ -22,7 +22,7 @@ Hay que tener en cuenta que tanto las entidades indicadas, como los value object
 
 ### CONTENIDO
 
-Este paquete contiene las clases necesarias para generar la estructura de "enumeraciones" y un ejemplo de cómo se implementarían.
+Este paquete contiene las clases necesarias para generar la estructura de "enumeraciones" y un ejemplo de cómo implementarlas.
 
 ### EJEMPLO
 
