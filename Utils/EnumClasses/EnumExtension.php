@@ -2,6 +2,7 @@
 
 namespace Utils\EnumClasses;
 
+use Utils\EnumClasses\ValueObjects\StringValue;
 use ReflectionClass;
 use ReflectionException;
 use Utils\EnumClasses\Exceptions\InvalidClassException;
@@ -13,8 +14,6 @@ use Utils\EnumClasses\Exceptions\InvalidValueException;
  */
 abstract class EnumExtension
 {
-    private string $value;
-
     /**
      * @throws ReflectionException
      * @throws InvalidValueException
@@ -22,17 +21,12 @@ abstract class EnumExtension
      */
     public function __construct(string $value, string $className)
     {
-        $this->value = $value;
+        parent::__construct($value);
         $validValues = $this->getValidValues($className);
         $isAValidValueInEnum = $this->checkValid($validValues);
         if (!$isAValidValueInEnum) {
             throw new InvalidValueException($value, $validValues);
         }
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
     }
 
     /**
@@ -42,7 +36,7 @@ abstract class EnumExtension
      */
     public function is(?string ...$value): bool
     {
-        return in_array($this->value, $value);
+        return in_array($this->getValue(), $value);
     }
 
     /**
@@ -52,7 +46,7 @@ abstract class EnumExtension
      */
     public function isNot(?string ...$value): bool
     {
-        return !in_array($this->value, $value);
+        return !in_array($this->getValue(), $value);
     }
 
     /**
@@ -62,7 +56,7 @@ abstract class EnumExtension
      */
     private function checkValid(array $validValues): bool
     {
-        return in_array($this->value, $validValues);
+        return in_array($this->getValue(), $validValues);
     }
 
     /**
